@@ -51,36 +51,16 @@ impl Cards {
 
         let max_card_count = *card_count.values().into_iter().max().unwrap_or(&0);
         let rank = match (max_card_count, joker_count) {
-                (5, 0)                          => FIVE_OF_A_KIND,
-
-                (4, 1)                          => FIVE_OF_A_KIND,
-                (4, 0)                          => FOUR_OF_A_KIND,
-
-                (3, 1) if card_count.len() == 2 => FOUR_OF_A_KIND,
                 (3, 0) if card_count.len() == 2 => FULL_HOUSE,
-
-                (3, 2)                          => FIVE_OF_A_KIND,
-                (3, 1)                          => FOUR_OF_A_KIND,
-                (3, 0)                          => THREE_OF_A_KIND,
-
-                (2, 1) if card_count.len() == 3 => THREE_OF_A_KIND,
                 (2, 0) if card_count.len() == 3 => TWO_PAIR,
-
-                (2, 2) if card_count.len() == 2 => FOUR_OF_A_KIND,
                 (2 ,1) if card_count.len() == 2 => FULL_HOUSE,
-
-                (2, 3)                          => FIVE_OF_A_KIND,
-                (2 ,2)                          => FOUR_OF_A_KIND,
-                (2, 1)                          => THREE_OF_A_KIND,
-                (2, 0)                          => ONE_PAIR,
-
-                (1, 4)                          => FIVE_OF_A_KIND,
-                (1, 3)                          => FOUR_OF_A_KIND,
-                (1, 2)                          => THREE_OF_A_KIND,
-                (1, 1)                          => ONE_PAIR,
-                (1, 0)                          => HIGH_CARD,
                 
-                (0, 5)                          => FIVE_OF_A_KIND,
+                (a, b) if a + b == 5 => FIVE_OF_A_KIND,
+                (a, b) if a + b == 4 => FOUR_OF_A_KIND,
+                (a, b) if a + b == 3 => THREE_OF_A_KIND,
+                (a, b) if a + b == 2 => ONE_PAIR,
+                (a, b) if a + b == 1 => HIGH_CARD,
+
                 _ => panic!("Oh No!")
             
         };
