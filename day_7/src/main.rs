@@ -50,72 +50,39 @@ impl Cards {
         }
 
         let max_card_count = *card_count.values().into_iter().max().unwrap_or(&0);
-        let rank = match max_card_count {
-            5 => {
-                assert!(joker_count == 0);
-                FIVE_OF_A_KIND
-            },
-            4 => {
-                match joker_count {
-                    0 => FOUR_OF_A_KIND,
-                    1 => FIVE_OF_A_KIND,
-                    _ => panic!("4")
-                }
-            },
-            3 if card_count.len() == 2 => {
-                match joker_count {
-                    0 => FULL_HOUSE,
-                    1 => FOUR_OF_A_KIND,
-                    _ => panic!("full house")
-                    
-                }
-            },
-            3 => {
-                match joker_count {
-                    0 => THREE_OF_A_KIND,
-                    1 => FOUR_OF_A_KIND,
-                    2 => FIVE_OF_A_KIND,
-                    _ => panic!("3")
-                }
-            },
-            2 if card_count.len() == 3 => {
-                match joker_count {
-                    0 => TWO_PAIR,
-                    1 => THREE_OF_A_KIND,
-                    _ => panic!("two pair")
-                }
-            },
-            2 if card_count.len() == 2  => {
-                match joker_count {
-                    1 => FULL_HOUSE,
-                    2 => FOUR_OF_A_KIND,
-                    _ => panic!("two pair 2")
-                    
-                }
-            }
-            2 => {
-                match joker_count {
-                    0 => ONE_PAIR,
-                    1 => THREE_OF_A_KIND,
-                    2 => FOUR_OF_A_KIND,
-                    3 => FIVE_OF_A_KIND,
-                    _ => panic!("2")
-                }
-            },
-            1 => {
-                match joker_count {
-                    0 => HIGH_CARD,
-                    1 => ONE_PAIR,
-                    2 => THREE_OF_A_KIND,
-                    3 => FOUR_OF_A_KIND,
-                    4 => FIVE_OF_A_KIND,
-                    _ => panic!("1")
-                }
-            },
-            _ => {
-                assert!(joker_count == 5);
-                FIVE_OF_A_KIND
-            }
+        let rank = match (max_card_count, joker_count) {
+                (5, 0)                          => FIVE_OF_A_KIND,
+
+                (4, 1)                          => FIVE_OF_A_KIND,
+                (4, 0)                          => FOUR_OF_A_KIND,
+
+                (3, 1) if card_count.len() == 2 => FOUR_OF_A_KIND,
+                (3, 0) if card_count.len() == 2 => FULL_HOUSE,
+
+                (3, 2)                          => FIVE_OF_A_KIND,
+                (3, 1)                          => FOUR_OF_A_KIND,
+                (3, 0)                          => THREE_OF_A_KIND,
+
+                (2, 1) if card_count.len() == 3 => THREE_OF_A_KIND,
+                (2, 0) if card_count.len() == 3 => TWO_PAIR,
+
+                (2, 2) if card_count.len() == 2 => FOUR_OF_A_KIND,
+                (2 ,1) if card_count.len() == 2 => FULL_HOUSE,
+
+                (2, 3)                          => FIVE_OF_A_KIND,
+                (2 ,2)                          => FOUR_OF_A_KIND,
+                (2, 1)                          => THREE_OF_A_KIND,
+                (2, 0)                          => ONE_PAIR,
+
+                (1, 4)                          => FIVE_OF_A_KIND,
+                (1, 3)                          => FOUR_OF_A_KIND,
+                (1, 2)                          => THREE_OF_A_KIND,
+                (1, 1)                          => ONE_PAIR,
+                (1, 0)                          => HIGH_CARD,
+                
+                (0, 5)                          => FIVE_OF_A_KIND,
+                _ => panic!("Oh No!")
+            
         };
 
         Cards {
