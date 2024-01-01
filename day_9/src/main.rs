@@ -3,7 +3,7 @@ use std::fs::read_to_string;
 fn parse_input() -> Vec<Vec<i32>> {
     let mut sequences = Vec::new();
     let input_str = read_to_string("./data.txt").unwrap();
-    let mut lines = input_str.lines();
+    let lines = input_str.lines();
 
     for line in lines {
         let numbers:Vec<i32> = line.split_whitespace().map(|n| n.parse().unwrap()).collect();

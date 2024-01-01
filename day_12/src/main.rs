@@ -79,7 +79,7 @@ impl Row {
         }
     }
 
-    fn find_combinations_recursive(&self, mut pattern_idx: usize, mut damage_idx: usize) -> i64 {
+    fn find_combinations_recursive(&self, mut pattern_idx: usize, damage_idx: usize) -> i64 {
         if let Some(cached) = self.cache.borrow().get(&(pattern_idx, damage_idx)) {
             return *cached;
         }

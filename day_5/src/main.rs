@@ -1,5 +1,5 @@
-use std::{fs::read_to_string, collections::HashMap, str::Lines};
-use core::str::Split;
+use std::{fs::read_to_string, str::Lines};
+
 
 #[derive(Clone)]
 struct Section {
@@ -167,7 +167,7 @@ impl MapEntry {
 }
 
 impl Map {
-    fn map(&self, section: &Section, check:bool) -> Vec<Section> {
+    fn map(&self, section: &Section, _check:bool) -> Vec<Section> {
         let mut new_sections = Vec::new();
 
         let mut last_seen_idx: i64 = 0;

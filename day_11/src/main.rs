@@ -1,4 +1,4 @@
-use std::{fs::read_to_string, collections::{HashMap, HashSet}, iter};
+use std::{fs::read_to_string, collections::{HashSet}};
 
 const MAX_ROW: i64 = 140;
 const MAX_COLUMN: i64 = 140;

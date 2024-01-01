@@ -1,4 +1,4 @@
-use std::{fs::read_to_string, collections::{HashMap, HashSet, VecDeque, BinaryHeap}, thread::current};
+use std::{fs::read_to_string, collections::{HashMap, HashSet}};
 use priority_queue::PriorityQueue;
 
 fn parse_input() -> Map  {
@@ -142,6 +142,6 @@ impl Map {
 }
 
 fn main() {
-    let mut map = parse_input();
+    let map = parse_input();
     println!("{}", map.walk());
 }
