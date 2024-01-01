@@ -29,7 +29,7 @@ enum Direction {
     Right
 }
 
-#[derive(PartialEq, Hash, Eq, Clone)]
+#[derive(PartialEq, Hash, Eq)]
 struct Node {
     pos: (i32, i32),
     direction: Direction,
