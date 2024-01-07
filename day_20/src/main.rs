@@ -1,4 +1,4 @@
-use std::{fs::read_to_string, collections::{HashMap, VecDeque}, clone};
+use std::{fs::read_to_string, collections::{HashMap, VecDeque}};
 
 fn parse_input() -> HashMap<String, Box<dyn Module>>  {
     let mut modules = HashMap::new();
@@ -42,7 +42,7 @@ enum Pulse {
 trait Module {
     fn evaluate(&mut self, input: &String, pulse: Pulse) -> Vec<(String, Pulse)>;
 
-    fn register_input(&mut self, input: &str) {}
+    fn register_input(&mut self, _input: &str) {}
 
     fn print(&self);
 }
@@ -125,7 +125,7 @@ impl Module for Conjuction {
     }
 }
 
-fn evaluate_once(i: i32, modules: &mut HashMap<String, Box<dyn Module>>) -> (i32, i32) {
+fn evaluate_once(_i: i32, modules: &mut HashMap<String, Box<dyn Module>>) -> (i32, i32) {
     let mut to_do = VecDeque::from([("button".to_string(), vec![("broadcaster".to_string(), Pulse::Low)])]);
     let mut high_pulse_count = 0;
     let mut low_pulse_count = 0;

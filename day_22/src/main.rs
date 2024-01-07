@@ -1,4 +1,4 @@
-use std::{fs::read_to_string, collections::{HashMap, HashSet, VecDeque}};
+use std::{fs::read_to_string, collections::{HashMap, HashSet}};
 
 use priority_queue::PriorityQueue;
 
@@ -74,7 +74,7 @@ fn get_supported_by(bricks: &HashMap<i32, Brick>) -> HashMap<i32, Vec<i32>> {
         let max_height = heights.iter().map(|(_,h)| *h).max().unwrap_or(0);
         let supporting: Vec<i32> = heights.iter()
             .filter(|(_, h)| *h == max_height)
-            .map(|(b, h)| *b)
+            .map(|(b, _h)| *b)
             .collect();
 
         supporting_bricks.insert(brick.brick_id, supporting);
